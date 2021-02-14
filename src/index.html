@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>FRC Dashboard</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/svg.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <div id="timer">
+            <div>2:15</div>
+        </div>
+
+        <div id="camera1-drop-shadow">
+            <div id="camera1"></div>
+        </div>
+        
+        <div id="camera2-drop-shadow">
+            <div id="camera2"></div>
+        </div>
+
+        <div id="vision">
+            <div>
+                <!-- The Text -->
+                <div class="title-text" style="text-align: left; padding-left: 4vw; padding-top: 8vh;">Vision Target:</div>
+                <div id="vision-target" style="padding-left: 4vw;">FOUND</div>
+                
+                <!-- The Target -->
+                <svg style="margin-left: 220px; margin-top: -90px; height: 200px">
+                    <circle id="vision-target-found" cx="120" cy="80" r="70"></circle>
+                    <circle id="vision-target-moving" cx="120" cy="80" r="45"></circle>
+                    <circle id="vision-target-none" cx="120" cy="80" r="20"></circle>
+                </svg>
+                <svg style="margin-top: -110px; margin-left: 2.4vw">
+                    <!-- The Arrows -->
+                    <polygon points="60,90 20,50 60,10 60,30 140,30 140,70 60,70" class="off" id="left-arrow"/>
+                    <polygon points="60,30 140,30 140,10 180,50 140,90 140,70 60,70" class="off" id="right-arrow"/>
+                </svg>
+
+                <div id="vision-degrees" class="big-number" style="margin-left: -12.5vw; margin-top: -42.5vh; font-family: sans-serif;">0º</div>
+
+                <button id="stopper-toggle" class="off" type="button" onclick="stopperToggle()" style="margin-left: 267px; width: 150px;">Stopper Closed</button>
+            </div>
+        </div>
+
+        <div id="climber">
+            <div>
+                <div class="title-text">Climber Height:</div>
+                <hr>
+                <svg style="margin-top: 4vh;">
+                    <line id="top-guide-line" class="guide-line stroke-off" x1="0" y1="32" x2="340" y2="32"></line>
+                    <line id="bottom-guide-line" class="guide-line stroke-off" x1="0" y1="132" x2="340" y2="132"></line>
+
+                    <text id="top-guide-text" class="fill-off" x="180" y="25" text-anchor="left">Max:</text>
+                    <text id="bottom-guide-text" class="fill-off" x="180" y="125" text-anchor="left">Min:</text>
+
+                    <rect class="filled" x="120" y="150" width="15" height="150"></rect>
+                    <rect class="filled" id="climb-arm" x="83" y="150" width="15" height="150"></rect>
+                    <circle id="climb-top" cx="90" cy="132" r="20"></circle>
+                </svg>
+            </div>
+        </div>
+
+        <div id="elevation">
+            <div>
+                <div class="title-text">Turret Angle:</div>
+                <hr>
+                <div id="elevation-number" class="big-number" style="padding-top: 10px; margin-left: 22px;">0°</div>
+                <svg style="margin-left: 35px; padding-top: 110px">
+                    <rect class="filled" x=10 width="120" height="5"></rect>
+                    <rect class="filled" id="turret-elevation" x=10 width="120" height="5" style="padding-left: 10px" transform="rotate(0, -60, 0)"></rect>
+                </svg>
+            </div>
+        </div>
+
+        <div id="gyro">
+            <div>
+                <div class="title-text">Turret Rotation:</div>
+                <hr>
+                
+                <svg style="margin-left: 2.1vw; padding-top: 6vh">
+                    <rect width="150" height="150"></rect>
+                    <rect  class="filled" x="37" y="0" width="75" height="50"></rect>
+                    <circle cx="75" cy="75" r="50"></circle>
+                    <rect class="filled" id="turret-direction" x="65" y="26" width="20" height="20"></rect>
+                </svg>
+            </div>
+        </div>
+        
+        <div id="side">
+            <div>
+                <div style="color:#999">Robot State:</div>
+                <div id="robot-state">UNKNOWN</div>
+
+                <button id="connect-button">Connect</button>
+                <hr>
+
+                <div class="title-text side-bar">Auton Select:</div>
+                <select id="auto-select" class="side-bar" style="width: 217px;">
+                    <option>No auto modes found</option>
+                    <!-- This gets populated by JS -->
+                </select>
+                <hr>
+
+                <div class="title-text side-bar">Shooter at Speed:</div>
+                <div class="on indicator side-bar" id="turret-speed" style="font-size: 5vh;">At Speed</div>
+                <hr>
+
+                <div class="title-text side-bar">Ball Count:</div>
+                <div class="big-number" id="ball-count">3</div>
+                <hr>
+
+                <div class="title-text side-bar">Indexer:</div>
+                <div id="indexer-text" class="on indicator side-bar" style="font-size: 6vh;">RUNNING</div>
+                <hr>
+
+                <div class="title-text side-bar">Gear:</div>
+                <div id="gear" class="on indicator side-bar" style="font-size: 6vh;">HIGH</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="login">
+        <input id="connect-address" type="text" value="localhost" disabled>
+        <button id="connect" disabled>Connecting</button>
+    </div>
+
+    <script src="networktables/networktables.js"></script>
+    <script src="ui.js"></script>
+    <script src="connection.js"></script>
+</body>
+
+</html>

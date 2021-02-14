@@ -1,0 +1,345 @@
+:root {
+    --background: #464646;
+    --dark-background: #2a2a2a;
+    --shadow: #1c1c1c;
+    --main: white;
+    --on: lime;
+    --warning: yellow;
+    --off: red;
+    --dull: #555;
+    --text: rgb(200, 200, 200);
+    --button: #2d2d2d;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Main Elements */
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--main);
+    overflow: hidden;
+    background: var(--dark-background);
+    font-family: sans-serif;
+}
+button, input[type="text"], input[type="number"], .select-container, select {
+    color: white;
+    background: var(--button);
+    border: none;
+    font-size: 14px;
+    padding: 6px 8px;
+    cursor: pointer;
+    outline: 0;
+}
+hr {
+    border: 1px solid #555;
+    margin: 5px 0;
+}
+
+/* Grid Setup */
+.grid-container {
+    display: grid;
+    padding: 10px;
+    grid-gap: 15px;
+    width: 100vw;
+    height: 100vh;
+    grid-template: repeat(5, minmax(0, 1fr)) / repeat(4, minmax(0, 1fr)));
+    grid-template-areas:
+        "side vision vision timer cam2 cam2"
+        "side vision vision climber cam2 cam2"
+        "side elevation gyro climber cam1 cam1"
+        "side elevation gyro climber cam1 cam1";
+}
+
+@keyframes color {
+    12.5% {
+        box-shadow: 3px 6px #ff0000;
+    }
+    25% {
+        box-shadow: 3px 6px #ffa500;
+    }
+    37.5% {
+        box-shadow: 3px 6px #ffff00;
+    }
+    50% {
+        box-shadow: 3px 6px #7fff00;
+    }
+    62.5% {
+        box-shadow: 3px 6px #00ffff;
+    }
+    75% {
+        box-shadow: 3px 6px #0000ff;
+    }
+    87.5% {
+        box-shadow: 3px 6px #9932cc;
+    }
+}
+
+@keyframes camera-color {
+    12.5% {
+        box-shadow: 3px -6px #ff0000;
+    }
+    25% {
+        box-shadow: 3px -6px #ffa500;
+    }
+    37.5% {
+        box-shadow: 3px -6px #ffff00;
+    }
+    50% {
+        box-shadow: 3px -6px #7fff00;
+    }
+    62.5% {
+        box-shadow: 3px -6px #00ffff;
+    }
+    75% {
+        box-shadow: 3px -6px #0000ff;
+    }
+    87.5% {
+        box-shadow: 3px -6px #9932cc;
+    }
+}
+
+.grid-container > div {
+    /* box-shadow: 3px 6px #ff0000; */
+    /* box-shadow: 3px 6px #d4ab08; */
+    /* box-shadow: 3px 6px rgb(0, 118, 40); */
+    /* box-shadow: 3px 6px var(--shadow); */
+    /* border: 2px solid var(--shadow); */
+    border-style: solid none none solid;
+    border-color: var(--shadow);
+    border-width: 2px;
+    border-radius: 7px;
+    background-color: var(--background);
+    /* animation-name: color; */
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: relative;
+}
+
+.grid-container > div > div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border-radius: 7px;
+}
+
+.grid-container > div > div > * {
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Grid Items */
+#driver-info {
+    grid-area: driver;
+}
+
+#auton {
+    font-size: 5vh;
+    grid-area: auton;
+}
+
+#vision {
+    grid-area: vision;
+}
+
+#climber {
+    grid-area: climber;
+}
+
+#elevation {
+    grid-area: elevation;
+}
+
+#heading {
+    grid-area: heading;
+}
+
+#timer {
+    font-family: monospace;
+    font-size: 6vw;
+    grid-area: timer;
+    text-align: center;
+    padding-top: 3vh;
+}
+
+#gyro {
+    grid-area: gyro;
+}
+
+#other {
+    grid-area: other;
+}
+
+#status {
+    grid-area: status;
+}
+#connect-button {
+    width: 100%;
+}
+#test-button {
+    width: 100%;
+    margin-top: 2px;
+}
+
+#side {
+    grid-area: side;
+}
+
+#buttons {
+    grid-area: buttons;
+}
+
+#camera1-drop-shadow {
+    grid-area: cam1;
+}
+
+#camera1 {
+    background: url("10.26.19.11:1181/stream.mjpg") 0 0 no-repeat;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* NOTE: transform: scaleX(-1) doesn't flip the image */
+    /*transform: scaleX(-1);*/
+    transform: scaleY(-1);
+}
+
+#camera2-drop-shadow {
+    grid-area: cam2;
+}
+
+#camera2 {
+    background: url("10.26.19.11:1182/stream.mjpg") 0 0 no-repeat;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    /* transform: scaleX(-1);
+    transform: scaleY(-1); */
+    transform: rotate(180deg);
+}
+
+#camera-label {
+    padding: 3px;
+    font-family: monospace;
+    background-color: var(--background);
+    opacity: 0.75;
+    height: 6vh;
+    font-size: 4vh;
+}
+#camera-status {
+    padding: 3px;
+    right: 3px;
+    font-family: monospace;
+    font-size: 4vh;
+    text-align: right;
+}
+
+/* Connection Buttons */
+#login {
+    position: fixed;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8)
+}
+body.login #login {
+    display: flex;
+}
+#login :disabled {
+    opacity: 0.6;
+}
+#login > * {
+    height: 40px;
+}
+#login > button {
+    margin-left: 5px;
+}
+
+/* Text CSS */
+.title-text {
+    font-size: 4vh;
+    color: var(--text);
+    text-align: center;
+}
+
+.big-number {
+    font-family: monospace;
+    font-size: 10vh;
+    text-align: center;
+}
+
+.indicator {
+    font-size: 7vh;
+    text-align: center;
+}
+
+#vision-degrees {
+    font-size: 8vh;
+}
+
+/* Other UI Elements */
+
+.side-bar {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.guide-line {
+    stroke-width: 1;
+    stroke-dasharray: 8, 8;
+}
+
+#vision-target {
+    font-size: 7vh;
+    color: var(--on);
+}
+
+#vision-target-none {
+    fill: var(--off);
+    stroke: var(--off);
+}
+
+#vision-target-moving {
+    fill: var(--warning);
+    stroke: var(--warning);
+}
+
+#vision-target-found {
+    fill: var(--on);
+    stroke: var(--on);
+}
+
+#team-number-shadow {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    padding-left: 27%;
+    color: var(--shadow);
+    font-size: 7vh;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+#team-number {
+    position: absolute;
+    padding-left: 27%;
+    color: rgb(40, 140, 20);
+    font-size: 7vh;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
